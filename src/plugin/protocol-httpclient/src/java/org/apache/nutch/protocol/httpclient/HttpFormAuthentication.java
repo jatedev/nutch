@@ -16,6 +16,7 @@
  */
 package org.apache.nutch.protocol.httpclient;
 
+import java.lang.invoke.MethodHandles;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.CookieHandler;
@@ -43,7 +44,7 @@ import org.slf4j.LoggerFactory;
 
 public class HttpFormAuthentication {
   private static final Logger LOGGER = LoggerFactory
-      .getLogger(HttpFormAuthentication.class);
+      .getLogger(MethodHandles.lookup().lookupClass());
   private static Map<String, String> defaultLoginHeaders = new HashMap<String, String>();
 
   static {
