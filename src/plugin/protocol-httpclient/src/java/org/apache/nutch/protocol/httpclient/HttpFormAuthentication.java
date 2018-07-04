@@ -156,6 +156,8 @@ public class HttpFormAuthentication {
           .getAdditionalPostHeaders().entrySet()) {
         get.addRequestHeader(entry.getKey(), entry.getValue());
       }
+      // This class does not handle compressed content yet
+      get.setRequestHeader("Accept-Encoding", "");
       client.executeMethod(get);
       Header cookieHeader = get.getResponseHeader("Set-Cookie");
       if (cookieHeader != null) {
