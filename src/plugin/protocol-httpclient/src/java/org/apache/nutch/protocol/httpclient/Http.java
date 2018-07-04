@@ -99,6 +99,9 @@ public class Http extends HttpBase {
   private String proxyRealm;
 
   private static HttpFormAuthConfigurer formConfigurer;
+  
+  // Does this need to be static?
+  private boolean credentialsResolved = false;
 
   /**
    * Returns the configured HTTP client.
@@ -168,7 +171,12 @@ public class Http extends HttpBase {
    */
   protected Response getResponse(URL url, CrawlDatum datum, boolean redirect)
       throws ProtocolException, IOException {
-    resolveCredentials(url);
+    
+    if (credentialsResolved == false) {
+      LOG.debug("getResponse: credentialsResolved was false, resolving credentials");
+      resolveCredentials(url);
+      credentialsResolved = true;
+    }
     return new HttpResponse(this, url, datum, redirect);
   }
 
